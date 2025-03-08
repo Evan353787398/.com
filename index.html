@@ -1,34 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>ABS/PC/PP拉杆箱专卖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业拉杆箱批发 - ABS/PC/PP材质优选</title>
     <style>
-        body { font-family: Arial; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .product { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
-        img { width: 100%; max-width: 300px; }
+        /* 基础样式 - 无需修改 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        
+        /* 导航栏 */
+        .navbar {
+            background: #2c3e50;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        
+        /* 轮播图 */
+        .slideshow {
+            max-width: 1000px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .slide {
+            display: none;
+            animation: fade 1.5s;
+        }
+        .slide img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+        
+        /* 产品展示 */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* 联系表单 */
+        .contact-form {
+            background: #f5f6fa;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <h1>专业拉杆箱批发</h1>
-    
-    <div class="product">
-        <h2>ABS超韧商务箱</h2>
-        <img src="images/abs-case.jpg">
-        <p>价格：￥299起 | 特点：防刮耐磨</p>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <a href="#home">首页</a>
+        <a href="#products">产品</a>
+        <a href="#contact">联系</a>
+    </nav>
+
+    <!-- 轮播图 -->
+    <div class="slideshow">
+        <div class="slide">
+            <img src="images/banner1.jpg" alt="工厂直营">
+        </div>
+        <div class="slide">
+            <img src="images/banner2.jpg" alt="材质对比">
+        </div>
     </div>
 
-    <div class="product">
-        <h2>PC超轻旅行箱</h2>
-        <img src="images/pc-case.jpg">
-        <p>价格：￥699起 | 特点：抗压防水</p>
+    <!-- 产品展示 -->
+    <div class="products" id="products">
+        <div class="product-card">
+            <img src="images/abs-case.jpg" alt="ABS箱" style="height:200px">
+            <h3>ABS超韧商务箱</h3>
+            <p>特点：防刮耐磨 | 价格：￥299起</p>
+            <button onclick="showDetails('abs')">查看详情</button>
+        </div>
+        
+        <div class="product-card">
+            <img src="images/pc-case.jpg" alt="PC箱" style="height:200px">
+            <h3>PC超轻旅行箱</h3>
+            <p>特点：抗压防水 | 价格：￥699起</p>
+            <button onclick="showDetails('pc')">查看详情</button>
+        </div>
+        
+        <div class="product-card">
+            <img src="images/pp-case.jpg" alt="PP箱" style="height:200px">
+            <h3>PP环保行李箱</h3>
+            <p>特点：环保材质 | 价格：￥459起</p>
+            <button onclick="showDetails('pp')">查看详情</button>
+        </div>
     </div>
 
-    <div class="product">
-        <h2>PP环保行李箱</h2>
-        <img src="images/pp-case.jpg">
-        <p>价格：￥459起 | 特点：环保材质</p>
+    <!-- 联系表单 -->
+    <div class="contact-form" id="contact">
+        <h2>立即获取报价</h2>
+        <form onsubmit="alert('已收到您的询价！我们将尽快联系您'); return false">
+            <input type="text" placeholder="您的姓名" required>
+            <input type="email" placeholder="电子邮箱" required>
+            <input type="tel" placeholder="联系电话">
+            <textarea rows="4" placeholder="留言（例如：需要ABS箱100件）"></textarea>
+            <button type="submit">提交询价</button>
+        </form>
     </div>
 
-    <h3>联系我们：sales@example.com</h3>
+    <script>
+        // 自动轮播图片
+        let slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) slideIndex = 1;
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 3000); // 3秒切换
+        }
+
+        // 查看产品详情
+        function showDetails(type) {
+            const details = {
+                abs: "材质：ABS树脂 | 尺寸：20/24/28寸 | 净重：4.2kg",
+                pc: "材质：100%聚碳酸酯 | 尺寸：20/28寸 | 净重：3.1kg",
+                pp: "材质：食品级聚丙烯 | 尺寸：22/26寸 | 净重：3.8kg"
+            };
+            alert("产品参数:\n" + details[type]);
+        }
+    </script>
 </body>
 </html>
